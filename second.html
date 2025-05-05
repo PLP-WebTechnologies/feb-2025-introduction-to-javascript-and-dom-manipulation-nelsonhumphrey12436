@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Webpage</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        #dynamicText {
+            font-size: 1.5em;
+            color: #333;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .styled {
+            color: green !important;
+            font-style: italic;
+            border-color: blue !important;
+        }
+
+        #actionButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        #newElement {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: lightcoral;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="dynamicText">Hello there!</div>
+    <button id="styleButton">Change Style</button>
+    <button id="textButton">Change Text</button>
+    <button id="elementButton">Add Element</button>
+    <div id="elementContainer"></div>
+
+    <script>
+        const dynamicTextElement = document.getElementById('dynamicText');
+        const styleButton = document.getElementById('styleButton');
+        const textButton = document.getElementById('textButton');
+        const elementButton = document.getElementById('elementButton');
+        const elementContainer = document.getElementById('elementContainer');
+        let newElementAdded = false;
+
+        // Change Text Content
+        textButton.addEventListener('click', () => {
+            dynamicTextElement.textContent = 'The text has been updated!';
+        });
+
+        // Modify CSS Styles
+        styleButton.addEventListener('click', () => {
+            dynamicTextElement.classList.toggle('styled');
+        });
+
+        // Add or Remove Element
+        elementButton.addEventListener('click', () => {
+            if (newElementAdded) {
+                const addedElement = document.getElementById('newElement');
+                if (addedElement) {
+                    elementContainer.removeChild(addedElement);
+                    newElementAdded = false;
+                    elementButton.textContent = 'Add Element';
+                }
+            } else {
+                const newDiv = document.createElement('div');
+                newDiv.id = 'newElement';
+                newDiv.textContent = 'A new element!';
+                elementContainer.appendChild(newDiv);
+                newElementAdded = true;
+                elementButton.textContent = 'Remove Element';
+            }
+        });
+    </script>
+</body>
+</html>
